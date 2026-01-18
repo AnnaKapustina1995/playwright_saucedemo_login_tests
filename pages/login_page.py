@@ -4,27 +4,35 @@ import re
 
 
 class LoginPage(BasePage):
-    url = "https://www.saucedemo.com/"
+    path = "/"
 
-    USERNAME = "#user-name"
-    PASSWORD = "#password"
-    LOGIN_BUTTON = "#login-button"
-    ERROR = "[data-test='error']"
+    def username_input(self):
+        return self.page.get_by_placeholder("Username")
 
-    def login(self, username, password):
-        self.page.locator(self.USERNAME).fill(username)
-        self.page.locator(self.PASSWORD).fill(password)
-        self.page.locator(self.LOGIN_BUTTON).click()
+    def password_input(self):
+        return self.page.get_by_placeholder("Password")
+
+    def login_button(self):
+        return self.page.get_by_role("button", name="Login")
+
+    def error_block(self):
+        return self.page.locator("[data-test='error']")
+
+    def login(self, username: str, password: str):
+        self.username_input().fill(username)
+        self.password_input().fill(password)
+        self.login_button().click()
 
     def submit_empty(self):
-        self.page.locator(self.LOGIN_BUTTON).click()
+        self.login_button().click()
 
     def should_be_logged_in(self):
         expect(self.page).to_have_url(re.compile(r".*/inventory\.html"))
 
-    def should_have_error(self, text):
-        expect(self.page.locator(self.ERROR)).to_be_visible()
-        expect(self.page.locator(self.ERROR)).to_contain_text(text)
+    def should_have_error(self, text: str):
+        expect(self.error_block()).to_be_visible()
+        expect(self.error_block()).to_contain_text(text)
+
 
 
 

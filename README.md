@@ -1,5 +1,3 @@
-# playwright_saucedemo_login_tests
-
 ## SauceDemo Login Tests (Playwright)
 
 Проект с автотестами для страницы логина сайта https://www.saucedemo.com/  
@@ -7,13 +5,14 @@
 
 ## Структура проекта
 
-- `pages/` — Page Object модули  
-  - `base_page.py` — базовый класс страницы  
-  - `login_page.py` — Page Object для страницы логина
+- `pages/` — Page Object классы
+  - `base_page.py` — базовая страница с общими методами
+  - `login_page.py` — Page Object страницы логина SauceDemo
 - `tests/` — автотесты
   - `test_login.py` — тесты авторизации
 - `conftest.py` — фикстуры pytest
-- `.gitignore` — исключения для Git
+- `pytest.ini` — настройки pytest
+- `README.md` — описание проекта
 
 ## Покрытые тест-кейсы
 
