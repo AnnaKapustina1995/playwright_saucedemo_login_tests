@@ -20,7 +20,6 @@ class LoginPage(BasePage):
         self.page.locator(self.LOGIN_BUTTON).click()
 
     def should_be_logged_in(self):
-        # ждём, что URL станет .../inventory.html
         expect(self.page).to_have_url(re.compile(r".*/inventory\.html"))
 
     def should_have_error(self, text):
