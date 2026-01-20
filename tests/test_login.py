@@ -9,7 +9,5 @@ def test_login_wrong_password_shows_error(login_page):
 
 
 def test_login_empty_fields_shows_required_error(login_page):
-    login_page.submit_empty()
+    login_page.login_button.click()
     login_page.should_have_error("Username is required")
-
-

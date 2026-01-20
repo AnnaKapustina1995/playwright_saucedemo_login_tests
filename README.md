@@ -6,24 +6,24 @@
 ## Структура проекта
 
 - `pages/` — Page Object классы
-  - `base_page.py` — базовая страница с общими методами
+  - `base_page.py` — базовая страница с общими методами и базовым URL
   - `login_page.py` — Page Object страницы логина SauceDemo
 - `tests/` — автотесты
   - `test_login.py` — тесты авторизации
-- `conftest.py` — фикстуры pytest
+- `conftest.py` — pytest-фикстуры
 - `pytest.ini` — настройки pytest
+- `requirements.txt` — зависимости проекта
 - `README.md` — описание проекта
 
 ## Покрытые тест-кейсы
 
-- **SD-001** — Авторизация с корректными данными  
-- **SD-002** — Авторизация с неверным паролем  
-- **SD-003** — Авторизация с пустыми полями  
+- Авторизация с корректными данными  
+- Авторизация с неверным паролем  
+- Авторизация с пустыми полями  
 
 ## Запуск тестов
 
 1. Установить зависимости:
 ```bash
-pip install pytest-playwright
+pip install -r requirements.txt
 playwright install
-pip install pytest-timeout
