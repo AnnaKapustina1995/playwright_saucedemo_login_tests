@@ -38,3 +38,19 @@ class InventoryPage(BasePage):
 
         self.should_badge_equal(n)
         return added_names
+
+    def remove_product_by_name(self, name: str) -> None:
+        item = self.inventory_items.filter(has=self.page.get_by_text(name, exact=True))
+        expect(item).to_have_count(1)
+
+        item.get_by_role("button", name="Remove").click()
+
+    def remove_first_n_products(self, names: List[str], n: int) -> List[str]:
+        n = min(n, len(names))
+
+        for i in range(n):
+            self.remove_product_by_name(names[i])
+
+        remaining = names[n:]
+        self.should_badge_equal(len(remaining))
+        return remaining

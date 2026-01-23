@@ -22,3 +22,6 @@ class CartPage(BasePage):
                 f"Ожидали: {expected_names}\n"
                 f"Фактически: {actual_names}"
             )
+
+    def should_not_contain_product(self, name: str) -> None:
+        expect(self.page.get_by_text(name, exact=True)).to_have_count(0)
