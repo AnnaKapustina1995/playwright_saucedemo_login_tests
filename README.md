@@ -15,7 +15,7 @@
 - `tests/` — автотесты
   - `test_login.py` — тесты авторизации
   - `test_cart.py` — тест корзины (добавление/удаление и бейдж)
-  - `test_checkout.py` — тест полного checkout flow до успешной покупки
+  - `test_checkout.py` — тест полного оформления заказа до успешной покупки
 - `conftest.py` — pytest-фикстуры
 - `pytest.ini` — настройки pytest
 - `requirements.txt` — зависимости проекта
