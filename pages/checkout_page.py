@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import Page, Locator, expect
 from pages.base_page import BasePage
 
@@ -15,13 +16,16 @@ class CheckoutPage(BasePage):
         self.finish_button: Locator = page.get_by_role("button", name="Finish")
 
     def fill_customer_info(self, first_name: str, last_name: str, postal_code: str) -> None:
-        self.first_name.fill(first_name)
-        self.last_name.fill(last_name)
-        self.postal_code.fill(postal_code)
+        with allure.step("Заполнить данные покупателя"):
+            self.first_name.fill(first_name)
+            self.last_name.fill(last_name)
+            self.postal_code.fill(postal_code)
 
     def continue_to_overview(self) -> None:
-        self.continue_button.click()
-        expect(self.page).to_have_url(self.BASE_URL + "/checkout-step-two.html")
+        with allure.step("Нажать Continue и перейти к подтверждению заказа"):
+            self.continue_button.click()
+            expect(self.page).to_have_url(self.BASE_URL + "/checkout-step-two.html")
 
     def finish_checkout(self) -> None:
-        self.finish_button.click()
+        with allure.step("Нажать Finish и завершить оформление заказа"):
+            self.finish_button.click()
