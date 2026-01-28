@@ -1,4 +1,5 @@
 import re
+import allure
 from playwright.sync_api import Page, expect
 from pages.base_page import BasePage
 
@@ -15,14 +16,17 @@ class LoginPage(BasePage):
         self.error = page.get_by_test_id("error")
 
     def login(self, username: str, password: str):
-        self.username_input.fill(username)
-        self.password_input.fill(password)
-        self.login_button.click()
+        with allure.step(f"Ввести логин '{username}' и пароль, нажать Login"):
+            self.username_input.fill(username)
+            self.password_input.fill(password)
+            self.login_button.click()
 
     def should_be_logged_in(self):
-        expect(self.page).to_have_url(re.compile(r".*/inventory\.html$"))
+        with allure.step("Проверить, что пользователь успешно вошёл и открыт inventory"):
+            expect(self.page).to_have_url(re.compile(r".*/inventory\.html$"))
 
     def should_have_error(self, text: str):
-        error = self.error
-        expect(error).to_be_visible()
-        expect(error).to_contain_text(text)
+        with allure.step(f"Проверить, что показана ошибка и содержит текст: '{text}'"):
+            error = self.error
+            expect(error).to_be_visible()
+            expect(error).to_contain_text(text)
