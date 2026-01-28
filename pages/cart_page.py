@@ -9,6 +9,7 @@ class CartPage(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
         self.cart_item_names: Locator = page.locator(".cart_item .inventory_item_name")
+        self.checkout_button: Locator = page.get_by_role("button", name="Checkout")
 
     def should_contain_products(self, expected_names: List[str]) -> None:
 
@@ -25,3 +26,6 @@ class CartPage(BasePage):
 
     def should_not_contain_product(self, name: str) -> None:
         expect(self.page.get_by_text(name, exact=True)).to_have_count(0)
+
+    def start_checkout(self) -> None:
+        self.checkout_button.click()
